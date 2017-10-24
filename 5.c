@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<stdlib.h>
+#include<ctype.h>
 
 pthread_t tid[2];
 
@@ -17,10 +18,24 @@ typedef struct cari{
 void* mencari(void *arg)
 {
   struct cari *ngitung =  (struct cari*)arg;
-	unsigned long i =0;
 	pthread_t id= pthread_self();
    if(pthread_equal(id,tid[0])){
-	printf("nama sudah masuk, %s", ngitung->n);
+	FILE *fnovel;
+	char ch;
+	char string[1000];
+	fnovel = fopen("Novel.txt", "r");
+        fseek (fnovel , 0 , SEEK_SET);
+	while  (!feof(fnovel)) {
+		fscanf(fnovel,"%s",string);	
+		if(strstr(string,ngitung->n) != 0) ngitung->c++;
+	
+		}
+	fclose(fnovel);
+	printf("%s : %d\n",ngitung->n,ngitung->c);
+	
+	}
+	else{
+
 	}
 }
 int main(void)
@@ -30,6 +45,7 @@ int main(void)
     input nama;
     while(i < 2){
 	scanf("%s",nama.n);
+	nama.c = 0;
 	err=pthread_create(&(tid[i]),NULL,&mencari,&nama);
 	i++;
 	}
