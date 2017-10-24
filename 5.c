@@ -24,7 +24,6 @@ void* mencari(void *arg)
 	char ch;
 	char string[1000];
 	fnovel = fopen("Novel.txt", "r");
-        fseek (fnovel , 0 , SEEK_SET);
 	while  (!feof(fnovel)) {
 		fscanf(fnovel,"%s",string);	
 		if(strstr(string,ngitung->n) != 0) ngitung->c++;
