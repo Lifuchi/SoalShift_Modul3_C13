@@ -6,31 +6,33 @@
 #include<stdlib.h>
 
 
-pthread_t tid[3];
+pthread_t tid[10];
 typedef struct inputan{
-	int f;
-	int c;
+	long long int f[10];
+	long long int c;
 }input;
 
 void* faktorial(void *arg)
 {
-	int i;
-	int itung =1;
+	long long int i;
+	long long int itung =1;
 	struct inputan *N = (struct inputan*)arg;
     pthread_t id=pthread_self();
 
     if(pthread_equal(id,tid[0]))
     {
-	for(i = 1 ; i <= N->f  ; i++ )
+	for(i = 1 ; i <= N->f[N->c]  ; i++ )
 	{
 		itung *=i; 
 	 	
 	}
-	printf("%d\n", itung);
+	printf("%lld\n", itung);
+	N->c++;
     
     }
     else 
     {
+	pthread_equal(id,tid[N->c]);
 	
         
     }
@@ -40,12 +42,15 @@ int main(void)
 {	int i;
     input angka;
 	angka.c =0;
-    while(i < 3)
+	i =0;
+    while(i < 3 )
     {
-	scanf("%d",&angka.f);
-        pthread_create(&(tid[i]),NULL,&faktorial,&angka);
-       i++;
+	scanf("%lld",&angka.f[i]);
+	i++;  
     }
+	i =0;
+	while (3 > i)
+		{pthread_create(&(tid[i]),NULL,&faktorial,&angka); i++;}
     pthread_join(tid[0],NULL);
     pthread_join(tid[1],NULL);
     pthread_join(tid[2],NULL);
