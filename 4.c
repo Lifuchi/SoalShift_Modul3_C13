@@ -6,37 +6,45 @@
 #include<stdlib.h>
 
 
-pthread_t tid[10];
+pthread_t tid[3];
 typedef struct inputan{
-	int faktornya;
+	int f;
 	int c;
 }input;
 
 void* faktorial(void *arg)
 {
-	int i=0;
-	struct inputan *ngitung = (struct inputan*)arg;
+	int i;
+	int itung =1;
+	struct inputan *N = (struct inputan*)arg;
     pthread_t id=pthread_self();
+
     if(pthread_equal(id,tid[0]))
     {
-	
+	for(i = 1 ; i <= N->f  ; i++ )
+	{
+		itung *=i; 
+	 	
+	}
+	printf("%d\n", itung);
     
     }
     else 
     {
-	pthread_equal(id,tid[angka.c++])
+	
         
     }
     return NULL;
 }
 int main(void)
-{
+{	int i;
     input angka;
 	angka.c =0;
-    while(angka.faktornya != EOF && angka.c < 10 )
+    while(i < 3)
     {
-        pthread_create(&(tid[angka.c++]),NULL,&faktorial,&angka);
-       angka.c++;
+	scanf("%d",&angka.f);
+        pthread_create(&(tid[i]),NULL,&faktorial,&angka);
+       i++;
     }
     pthread_join(tid[0],NULL);
     pthread_join(tid[1],NULL);
