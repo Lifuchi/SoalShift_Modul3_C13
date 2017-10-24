@@ -16,8 +16,12 @@ typedef struct cari{
 
 void* mencari(void *arg)
 {
-    unsigned long i=0;
-    pthread_t id=pthread_self();
+  struct cari *ngitung =  (struct cari*)arg;
+	unsigned long i =0;
+	pthread_t id= pthread_self();
+   if(pthread_equal(id,tid[0])){
+	printf("nama sudah masuk, %s", ngitung->n);
+	}
 }
 int main(void)
 {
