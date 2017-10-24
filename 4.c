@@ -33,7 +33,13 @@ void* faktorial(void *arg)
     else 
     {
 	pthread_equal(id,tid[N->c]);
-	
+	for(i = 1 ; i <= N->f[N->c]  ; i++ )
+	{
+		itung *=i; 
+	 	
+	}
+	printf("%lld\n", itung);
+	N->c++;
         
     }
     return NULL;
@@ -49,7 +55,7 @@ int main(void)
 	i++;  
     }
 	i =0;
-	while (3 > i)
+	while (i < 3)
 		{pthread_create(&(tid[i]),NULL,&faktorial,&angka); i++;}
     pthread_join(tid[0],NULL);
     pthread_join(tid[1],NULL);
