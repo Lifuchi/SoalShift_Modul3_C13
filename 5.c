@@ -34,6 +34,20 @@ void* mencari(void *arg)
 	
 	}
 	else{
+	
+	FILE *fnovel;
+	char ch;
+	char string[1000];
+	fnovel = fopen("Novel.txt", "r");
+	while  (!feof(fnovel)) {
+		fscanf(fnovel,"%s",string);	
+		if(strstr(string,ngitung->n) != 0) ngitung->c++;
+	
+		}
+	fclose(fnovel);
+	printf("%s : %d\n",ngitung->n,ngitung->c);
+	
+
 
 	}
 }
