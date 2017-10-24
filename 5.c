@@ -47,9 +47,8 @@ void* mencari(void *arg)
 	fclose(fnovel);
 	printf("%s : %d\n",ngitung->n,ngitung->c);
 	
-
-
 	}
+	return NULL;
 }
 int main(void)
 {
