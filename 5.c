@@ -7,6 +7,13 @@
 
 pthread_t tid[2];
 
+
+typedef struct cari{
+	char n[100];
+	int c;
+}input;
+
+
 void* mencari(void *arg)
 {
     unsigned long i=0;
@@ -16,8 +23,10 @@ int main(void)
 {
     int i=0;
     int err;
+    input nama;
     while(i < 2){
-	err=pthread_create(&(tid[i]),NULL,&mencari,NULL);//membuat thread
+	scanf("%s",nama.n);
+	err=pthread_create(&(tid[i]),NULL,&mencari,&nama);
 	i++;
 	}
     pthread_join(tid[0],NULL);
