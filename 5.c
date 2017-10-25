@@ -42,10 +42,10 @@ void* mencari(void *arg)
 }
 int main(int argc ,char *argv[])
 {
-    int i=0, j =0;
+    int i=0, j =0 , t = 0;
     input nama;
     
-     while(1)
+     while(argc >= i)
     {	if(argv[i+1] == NULL) break;
 	nama.n2[i] = argv[i+1];	
 	i++;  
@@ -57,8 +57,9 @@ int main(int argc ,char *argv[])
 	j++;
 	}
 
-    pthread_join(tid[0],NULL);
-    pthread_join(tid[1],NULL);
+  	for(t = 0 ; t < i ;t++){
+	pthread_join(tid[t],NULL);
+ 	}
 
     return 0;
 }
