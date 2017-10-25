@@ -6,9 +6,10 @@
 #include<stdlib.h>
 
 
-pthread_t tid[10];
+pthread_t tid[11];
+
 typedef struct inputan{
-	long long int f[10];
+	long long int f[100];
 	long long int c;
 }input;
 
@@ -17,46 +18,39 @@ void* faktorial(void *arg)
 	long long int i;
 	long long int itung =1;
 	struct inputan *N = (struct inputan*)arg;
-    pthread_t id=pthread_self();
-
-    if(pthread_equal(id,tid[0]))
-    {
-	for(i = 1 ; i <= N->f[N->c]  ; i++ )
-	{
-		itung *=i; 
-	 	
+	pthread_t id=pthread_self();
+	int b = 0;	
+	for(b = 0; b < N->c ; b++){
+    	if(pthread_equal(id,tid[b])){
+	
+	for(i = 1 ; i <= N->f[b]  ; i++ )
+		{
+		itung *=i;  	
+		}
+	printf("Hasil %lld! = %lld\n",N->f[b],itung);
 	}
-	printf("Hasil %lld! = %lld\n",N->f[N->c],itung);
-	N->c++;
+    }
     
-    }
-    else 
-    {
-	pthread_equal(id,tid[N->c]);
-	for(i = 1 ; i <= N->f[N->c]  ; i++ )
-	{
-		itung *=i; 
-	 	
-	}
-		printf("Hasil %lld! = %lld\n",N->f[N->c],itung);	N->c++;
-        
-    }
     return NULL;
 }
 int main(void)
-{	int i;
+{	int i , j;
     input angka;
 	angka.c =0;
 	i =0;
-    while(i < 3 )
+	char c;
+    while(1)
     {
-	scanf("%lld",&angka.f[i]);
-	i++;  
+	scanf("%lld%c",&angka.f[i],&c); i++;  
+	if(c == '\n') break;
     }
-	i =0;
-	while (i < 3)
-		{pthread_create(&(tid[i]),NULL,&faktorial,&angka); i++;}
-    pthread_join(tid[0],NULL);
+	angka.c = i;
+	j = 0;
+    while (j < i)
+    {
+	pthread_create(&(tid[j]),NULL,&faktorial,&angka);j++;}
+	
+     pthread_join(tid[0],NULL);
     pthread_join(tid[1],NULL);
     pthread_join(tid[2],NULL);
     pthread_join(tid[3],NULL);
