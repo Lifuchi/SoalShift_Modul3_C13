@@ -21,15 +21,13 @@ void* pemain1(void *arg)
     struct player *maen =  (struct player*)arg;
     char t;
     status = 1;	
-    int flag = 0;
+    int flag = 4;
 
-    while(flag < 4){
+    while(flag != 0){
 	printf("\nPlayer 1 silahkan memilih angka untuk meletakkan ranjau sebanyak 1-4 \n");
-	scanf("%d%c",&maen->lub,&t);
+	scanf("%d",&maen->lub,&t);
 	maen->mine[maen->lub] = 1;
-	flag++;
-	if(t == '\n') return 0; 
-	
+	flag--; 
     }
 	status = 0;
     return NULL;
