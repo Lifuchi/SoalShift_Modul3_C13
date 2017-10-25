@@ -18,15 +18,15 @@ int MINE;
 };
 
 int main(){
+struct stock *s;
 
 key_t sharedKEY = ftok("#", 'A');
-int sharedID = shmget(sharedKEY, sizeof(struct Memory), IPC_CREAT | 0666);
+int sharedID = shmget(sharedKEY, sizeof(struct stock), IPC_CREAT | 0666);
 
 s = (struct stock *) shmat(sharedID, NULL, 0);
 
 int pilih;
 
-struct stock *s;
 char senjata[100];
 int total;
 
@@ -53,7 +53,7 @@ if (strcmp(senjata,"MP4A1")==0){
  printf("Barang di stock tidak cukup\n");
  }
  else{
- s.MP4A1 = s.MP4A1-total;
+ s->MP4A1 = s->MP4A1-total;
  }
 }
 
