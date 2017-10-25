@@ -69,7 +69,7 @@ if (strcmp(senjata,"PM2-V1")==0){
 
 }
 
-if (strcmp(senjata,"SPR-3")==0){
+else if (strcmp(senjata,"SPR-3")==0){
  if (total > s.SPR_3){
  printf("stock tidak cukup\n");
  }
@@ -78,7 +78,7 @@ if (strcmp(senjata,"SPR-3")==0){
  }
 }
 
-if (strcmp(senjata,"SS2-V5")==0){
+else if (strcmp(senjata,"SS2-V5")==0){
  if (total > s.SS2_V5){
  printf("stock tidak cukup\n");
  }
@@ -87,7 +87,7 @@ if (strcmp(senjata,"SS2-V5")==0){
  }
 }
 
-if (strcmp(senjata,"SPG1-V3")==0){
+else if (strcmp(senjata,"SPG1-V3")==0){
  if (total > s.SPG1_V3){
  printf("stock tidak cukup\n");
  }
@@ -97,7 +97,7 @@ if (strcmp(senjata,"SPG1-V3")==0){
 
 }
 
-if (strcmp(senjata,"MINE")==0){
+else if (strcmp(senjata,"MINE")==0){
  if (total > s.MINE){
  printf("stock tidak cukup\n");
  }
@@ -105,6 +105,8 @@ if (strcmp(senjata,"MINE")==0){
  s.MINE = s.MINE-total;
  }
 }
+ else
+ printf("barang tidak ada/n");
 }
 
 }
