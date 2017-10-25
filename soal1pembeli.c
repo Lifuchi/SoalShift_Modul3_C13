@@ -18,10 +18,15 @@ int MINE;
 };
 
 int main(){
-key_t KEY;
+
+key_t sharedKEY = ftok("#", 'A');
+int sharedID = shmget(sharedKEY, sizeof(struct Memory), IPC_CREAT | 0666);
+
+s = (struct stock *) shmat(sharedID, NULL, 0);
+
 int pilih;
 
-struct stock s;
+struct stock *s;
 char senjata[100];
 int total;
 
