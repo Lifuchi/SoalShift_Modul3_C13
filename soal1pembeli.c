@@ -19,6 +19,7 @@ int MINE;
 
 int main(){
 key_t KEY;
+int pilih;
 
 struct stock s;
 char name[100];
@@ -30,3 +31,20 @@ s.SPR_3=0;
 s.SS2_V5=0;
 s.SPG1_V3=0;
 s.MINE=0;
+
+while(1)
+{
+printf("1. Lihat stock senjata\n");
+printf("2. Beli senjata\n");
+scanf("%d", &pilih);
+
+if (pilih == 1)
+{
+printf("MP4A1 %d\n", s.MP4A1);
+printf("PM2-V1 %d\n", s.PM2_V1);
+printf("SPR-3 %d\n", s.SPR_3);
+printf("S2-V5 %d\n", s.SS2_V5);
+printf("SPG1-V3 %d\n", s.SPG1_V3);
+printf("MINE %d\n", s.MINE);
+}
+}
