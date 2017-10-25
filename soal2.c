@@ -9,7 +9,7 @@ pthread_t tid2;
 int status;
 
 typedef struct player{
-	int mine[16];
+	int mine[17];
 	int poin;
 	int lub;
 }pmn;
@@ -20,28 +20,44 @@ void* pemain1(void *arg)
 {
     struct player *maen =  (struct player*)arg;
     char t;
-    status = 1;	
+    status = 0;	
     int flag = 4;
-
+printf("\nPlayer 1 silahkan memilih angka untuk meletakkan ranjau sebanyak 1-4 \n");
     while(flag != 0){
-	printf("\nPlayer 1 silahkan memilih angka untuk meletakkan ranjau sebanyak 1-4 \n");
 	scanf("%d",&maen->lub,&t);
 	maen->mine[maen->lub] = 1;
 	flag--; 
     }
-	status = 0;
+    printf("ranjau sudah dipasang\n");
+    status = 1;
+    while(status != 1)
+    {
+
+    }
+    printf("Player 2 silahkan memilih 4 lubang\n");
+    int i, j ;
+    int x;
+	for (i = 0 ; i < 4 ; i++)
+	{
+		scanf("%d", &x);
+		if(maen->mine[x] == 1) {printf("anda benar\n");maen->poin += 1;}
+		else {printf("anda salah\n");} 	
+	}
+
     return NULL;
 }
 
 
 void* pemain2(void *arg)
 {
-    struct player *ngitung =  (struct player*)arg;
+    struct player *maen2 =  (struct player*)arg;
     while(status != 1)
     {
 
     }
-
+    
+	
+    
 }
  
 int main(void)
@@ -54,9 +70,10 @@ int main(void)
     
     pthread_create(&(tid1), NULL, &pemain1, &plyr1);
     pthread_create(&(tid2), NULL, &pemain2, &plyr2);
- 
-    printf("poin pemain 1 = \n",plyr1.poin );
-    printf("poin pemain 2 = \n",plyr2.poin );
+
+    printf("poin pemain 1 =%d \n",plyr1.poin );
+    printf("poin pemain 2 =%d \n",plyr2.poin );
+
     pthread_join(tid1, NULL);
     pthread_join(tid2, NULL);
  
