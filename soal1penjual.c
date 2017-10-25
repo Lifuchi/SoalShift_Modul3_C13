@@ -21,7 +21,7 @@ int main(){
 struct stock *data;
 char nama_barang[100];
 
-key_t KEY = ftok("#", 'A');
+key_t KEY = 1234;
 int sharedID = shmget(KEY, sizeof(struct stock), IPC_CREAT | 0666);
 
 //key_t KEY;
@@ -40,27 +40,27 @@ scanf("%d", &pilih);
 if (pilih == 1)
 {
  if(data->MP4A1>0){
- printf("Jumlah MP4A1 = %d\n", data->MP4A1);
+ printf("MP4A1 %d\n", data->MP4A1);
  }
 
  if(data->PM2_V1>0){
- printf("Jumlah PM2-V1 = %d\n", data->PM2_V1);
+ printf("PM2-V1 %d\n", data->PM2_V1);
  }
 
  if(data->SPR_3>0){
- printf("Jumlah SPR-3 = %d\n", data->SPR_3);
+ printf("SPR-3 %d\n", data->SPR_3);
  }
 
  if(data->SS2_V5>0){
- printf("Jumlah SS2-V5 = %d\n", data->SS2_V5);
+ printf("SS2-V5 %d\n", data->SS2_V5);
  }
 
  if(data->SPG1_V3>0){
- printf("Jumlah SPG1-V3 = %d\n", data->SPG1_V3);
+ printf("SPG1-V3 %d\n", data->SPG1_V3);
  }
 
  if(data->MINE>0){
- printf("Jumlah MINE = %d\n", data->MINE);
+ printf("MINE %d\n", data->MINE);
  }
 else
 printf("stock kosong");
