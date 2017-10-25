@@ -33,16 +33,17 @@ void* faktorial(void *arg)
     
     return NULL;
 }
-int main(void)
-{	int i , j;
+int main(int argc ,char *argv[])
+{	int i , j, con;
 	input angka;
 	char c;
 	i =0;
 
     while(1)
-    {
-	scanf("%lld%c",&angka.f[i],&c); i++;  
-	if(c == '\n') break;
+    {	if(argv[i+1] == NULL) break;
+	con = atoi(argv[i+1]);
+	angka.f[i] = con;	
+	i++;  
     }
 	angka.c = i;
 
