@@ -26,7 +26,7 @@ void* faktorial(void *arg)
 		itung *=i; 
 	 	
 	}
-	printf("%lld\n", itung);
+	printf("Hasil %lld! = %lld\n",N->f[N->c],itung);
 	N->c++;
     
     }
@@ -38,8 +38,7 @@ void* faktorial(void *arg)
 		itung *=i; 
 	 	
 	}
-	printf("%lld\n", itung);
-	N->c++;
+		printf("Hasil %lld! = %lld\n",N->f[N->c],itung);	N->c++;
         
     }
     return NULL;
