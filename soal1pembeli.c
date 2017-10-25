@@ -14,13 +14,12 @@ int SPR_3;
 int SS2_V5;
 int SPG1_V3;
 int MINE;
-//int status;
 };
 
 int main(){
 struct stock *s;
 
-key_t sharedKEY = ftok("#", 'A');
+key_t sharedKEY = 1234;
 int sharedID = shmget(sharedKEY, sizeof(struct stock), IPC_CREAT | 0666);
 
 s = (struct stock *) shmat(sharedID, NULL, 0);
