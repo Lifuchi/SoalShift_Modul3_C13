@@ -27,15 +27,33 @@ void* peliharaan(void *arg)
 		p->hp1 = p->hp1-15;
 		if (p->hp1 <= 0)  exit(EXIT_FAILURE);				
 	}
-	else {
+	else if(pthread_equal(id,tid[1])) {
 		sleep(20);		
 		p->hp2 = p->hp2-10;						
 		if (p->hp2 <= 0)  exit(EXIT_FAILURE);
 		}	
 	}
+	
    	return NULL;
 
 }
+
+void* makan(void *arg)
+{
+	struct peliharaaan *p =  (struct peliharaaan*)arg;
+	pthread_t id= pthread_self();	
+	if(pthread_equal(id,tid[2])){
+		p->hp1 = p->hp1+10;				
+	}
+	else if(pthread_equal(id,tid[3])) {
+		p->hp2 = p->hp2+10;
+		}	
+
+	
+   	return NULL;
+
+}
+
 int main(void)
 {
 	input pet;
@@ -46,18 +64,19 @@ int main(void)
 	pet.hp1 = 100;
 	pet.hp2 = 100;
 	printf("Merawat Peliharaan Kolom\n");
-	printf("Klik 1 untuk memberi makan Lohan \nKlik 2 untuk memberi makan Kepiting \n");
+	printf("Klik 1 untuk memberi makan Lohan \nKlik 2 untuk memberi makan Kepiting \nKlik 3 untuk melihat status\n");
 
-	
-	while(pet.hp2 > 0 && pet.hp1 > 0){
 	pthread_create(&(tid[0]),NULL,&peliharaan,&pet);
 	pthread_create(&(tid[1]),NULL,&peliharaan,&pet);
+	while(pet.hp2 > 0 && pet.hp1 > 0){
 	scanf("%d", &pilih);
 	
 	if(pilih == 1){
+	pthread_create(&(tid[2]),NULL,&makan,&pet);	
 
 	}
 	else if(pilih == 2){
+	pthread_create(&(tid[3]),NULL,&makan,&pet);
 
 	}
 	else if(pilih == 3){
@@ -70,5 +89,7 @@ int main(void)
 	
     pthread_join(tid[0],NULL);
     pthread_join(tid[1],NULL);
+    pthread_join(tid[2],NULL);
+    pthread_join(tid[3],NULL);
     return 0;
 }
