@@ -46,11 +46,15 @@ void* makan(void *arg)
 	pthread_t id= pthread_self();	
 	if(pthread_equal(id,tid[2])){		
 		p->hp1 = p->hp1+10;
+		printf("%s status : %d \n",p->pet1 ,p->hp1);
+		printf("%s status : %d \n",p->pet2 ,p->hp2);
 		if (p->hp1 > 100)  exit(EXIT_FAILURE);							
 	}
 	else if(pthread_equal(id,tid[3])) {
 		p->hp2 = p->hp2+10;
-		if (p->hp1 > 100)  exit(EXIT_FAILURE);			
+		printf("%s status : %d \n",p->pet1 ,p->hp1);
+		printf("%s status : %d \n",p->pet2 ,p->hp2);
+		if (p->hp2 > 100)  exit(EXIT_FAILURE);			
 		}	
 
 	
@@ -68,26 +72,26 @@ int main(void)
 	pet.hp1 = 100;
 	pet.hp2 = 100;
 	printf("Merawat Peliharaan Kolom\n");
-	printf("Klik 1 untuk memberi makan Lohan \nKlik 2 untuk memberi makan Kepiting \nKlik 3 untuk melihat status\n");
+	printf("Klik 0 untuk melihat status \nKlik 1 untuk memberi makan Lohan \nKlik 2 untuk memberi makan Kepiting \n\n");
 
 	pthread_create(&(tid[0]),NULL,&peliharaan,&pet);
 	pthread_create(&(tid[1]),NULL,&peliharaan,&pet);
-	while(pet.hp2 > 0 && pet.hp1 > 0){
+	printf("%s status : %d \n",pet.pet1 ,pet.hp1);
+	printf("%s status : %d \n",pet.pet2 ,pet.hp2);
+	while((pet.hp2 > 0 && pet.hp1 > 0) || (pet.hp2 <= 100 && pet.hp1 <= 100)){
+		
 	scanf("%d", &pilih);
-	
 	if(pilih == 1){
 	pthread_create(&(tid[2]),NULL,&makan,&pet);	
-
 	}
 	else if(pilih == 2){
 	pthread_create(&(tid[3]),NULL,&makan,&pet);
-
 	}
-	else if(pilih == 3){
+	else if(pilih == 0){
 	printf("%s status : %d \n",pet.pet1 ,pet.hp1);
 	printf("%s status : %d \n",pet.pet2 ,pet.hp2);
-
 	}
+
 }
 
 	
