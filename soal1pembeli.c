@@ -22,15 +22,8 @@ key_t KEY;
 int pilih;
 
 struct stock s;
-char name[100];
+char senjata[100];
 int total;
-
-s.MP4A1=0;
-s.PM2_V1=0;
-s.SPR_3=0;
-s.SS2_V5=0;
-s.SPG1_V3=0;
-s.MINE=0;
 
 while(1)
 {
@@ -46,5 +39,68 @@ printf("SPR-3 %d\n", s.SPR_3);
 printf("S2-V5 %d\n", s.SS2_V5);
 printf("SPG1-V3 %d\n", s.SPG1_V3);
 printf("MINE %d\n", s.MINE);
+}
+else if(pilih == 2){
+scanf("%s %d", senjata, &total);
+
+if (strcmp(senjata,"MP4A1")==0){
+ if (total > s.MP4A1){
+ printf("Barang di stock tidak cukup\n");
+ }
+ else{
+ s.MP4A1 = s.MP4A1-total;
+ }
+}
+
+if (strcmp(senjata,"PM2-V1")==0){
+ if (total > s.PM2_V1){
+ printf("stock tidak cukup\n");
+ }
+ else{
+ s.PM2_V1 = s.PM2_V1-total;
+ }
+
+}
+
+else if (strcmp(senjata,"SPR-3")==0){
+ if (total > s.SPR_3){
+ printf("stock tidak cukup\n");
+ }
+ else{
+ s.SPR_3 -= total;
+ }
+}
+
+else if (strcmp(senjata,"SS2-V5")==0){
+ if (total > s.SS2_V5){
+ printf("stock tidak cukup\n");
+ }
+ else{
+ s.SS2_V5 = s.SS2_V5-total;
+ }
+}
+
+else if (strcmp(senjata,"SPG1-V3")==0){
+ if (total > s.SPG1_V3){
+ printf("stock tidak cukup\n");
+ }
+ else{
+ s.SPG1_V3 = s.SPG1_V3-total;
+ }
+
+}
+
+else if (strcmp(senjata,"MINE")==0){
+ if (total > s.MINE){
+ printf("stock tidak cukup\n");
+ }
+ else{
+ s.MINE = s.MINE-total;
+ }
+}
+ else
+ printf("barang tidak ada\n");
+}
+
 }
 }
