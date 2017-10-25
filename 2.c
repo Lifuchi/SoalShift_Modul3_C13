@@ -17,8 +17,7 @@ typedef struct player{
  
 void* pemain1(void *arg)
 {
- 
- 
+    struct player *maen =  (struct player*)arg;
     status = 1;
     return NULL;
 }
@@ -26,6 +25,7 @@ void* pemain1(void *arg)
 
 void* pemain2(void *arg)
 {
+    struct player *ngitung =  (struct player*)arg;
     while(status != 1)
     {
 
@@ -35,13 +35,13 @@ void* pemain2(void *arg)
  
 int main(void)
 {
-    pmn pemain1,pemain2;
-    pmn pemain1.poin = 0;
-    pmn pemain2.poin = 0;
+    pmn plyr1,plyr2;
+    plyr1.poin = 0;
+    plyr2.poin = 0;
 	
 
-    pthread_create(&(tid1), NULL, &pemain1, NULL);
-    pthread_create(&(tid2), NULL, &pemain2, NULL);
+    pthread_create(&(tid1), NULL, &pemain1, &plyr1);
+    pthread_create(&(tid2), NULL, &pemain2, &plyr2);
  
     pthread_join(tid1, NULL);
     pthread_join(tid2, NULL);
