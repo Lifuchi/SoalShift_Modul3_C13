@@ -17,3 +17,16 @@ int MINE;
 //int status;
 };
 
+int main(){
+key_t KEY;
+
+struct stock s;
+char name[100];
+int total;
+
+s.MP4A1=0;
+s.PM2_V1=0;
+s.SPR_3=0;
+s.SS2_V5=0;
+s.SPG1_V3=0;
+s.MINE=0;
