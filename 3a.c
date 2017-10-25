@@ -23,14 +23,16 @@ void* peliharaan(void *arg)
 	pthread_t id= pthread_self();
 	while(1){	
 	if(pthread_equal(id,tid[0])){
+		if (p->hp1 <= 0 || p->hp1 > 100)  exit(EXIT_FAILURE);			
 		sleep(10);	
 		p->hp1 = p->hp1-15;
-		if (p->hp1 <= 0)  exit(EXIT_FAILURE);				
+					
 	}
 	else if(pthread_equal(id,tid[1])) {
+		if (p->hp2 <= 0 || p->hp2 > 100)  exit(EXIT_FAILURE);
 		sleep(20);		
 		p->hp2 = p->hp2-10;						
-		if (p->hp2 <= 0)  exit(EXIT_FAILURE);
+
 		}	
 	}
 	
@@ -42,11 +44,13 @@ void* makan(void *arg)
 {
 	struct peliharaaan *p =  (struct peliharaaan*)arg;
 	pthread_t id= pthread_self();	
-	if(pthread_equal(id,tid[2])){
-		p->hp1 = p->hp1+10;				
+	if(pthread_equal(id,tid[2])){		
+		p->hp1 = p->hp1+10;
+		if (p->hp1 > 100)  exit(EXIT_FAILURE);							
 	}
 	else if(pthread_equal(id,tid[3])) {
 		p->hp2 = p->hp2+10;
+		if (p->hp1 > 100)  exit(EXIT_FAILURE);			
 		}	
 
 	
