@@ -37,12 +37,31 @@ scanf("%d", &pilih);
 
 if (pilih == 1)
 {
-printf("MP4A1 %d\n", s->MP4A1);
-printf("PM2-V1 %d\n", s->PM2_V1);
-printf("SPR-3 %d\n", s->SPR_3);
-printf("S2-V5 %d\n", s->SS2_V5);
-printf("SPG1-V3 %d\n", s->SPG1_V3);
-printf("MINE %d\n", s->MINE);
+ if(s->MP4A1>0){
+ printf("MP4A1 %d\n", s->MP4A1);
+ }
+
+ if(s->PM2_V1>0){
+ printf("PM2-V1 %d\n", s->PM2_V1);
+ }
+
+ if(s->SPR_3>0){
+ printf("SPR-3 %d\n", s->SPR_3);
+ }
+
+ if(s->SS2_V5>0){
+ printf("SS2-V5 %d\n", s->SS2_V5);
+ }
+
+ if(s->SPG1_V3>0){
+ printf("SPG1-V3 %d\n", s->SPG1_V3);
+ }
+
+ if(s->MINE>0){
+ printf("MINE %d\n", s->MINE);
+ }
+else
+printf("stock kosong");
 }
 else if(pilih == 2){
 scanf("%s %d", senjata, &total);
@@ -102,8 +121,8 @@ else if (strcmp(senjata,"MINE")==0){
  s->MINE = s->MINE-total;
  }
 }
- else
- printf("barang tidak ada\n");
+ //else
+ //printf("barang tidak ada\n");
 }
 
 }
