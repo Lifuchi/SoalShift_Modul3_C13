@@ -99,7 +99,7 @@ else if (strcmp(senjata,"MINE")==0){
  }
 }
  else
- printf("barang tidak ada/n");
+ printf("barang tidak ada\n");
 }
 
 }
