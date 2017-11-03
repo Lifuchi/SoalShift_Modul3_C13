@@ -7,95 +7,119 @@
 pthread_t tid1;
 pthread_t tid2;
 int status;
-int status2;
+pthread_mutex_t lock;
 
 typedef struct player{
 	int mine[17];
 	int poin;
 	int lub;
+	int mine2[17];
+	int poin2;
+	int lub2;
+	int htung;
+	int htung2;
 }pmn;
 
 
  
 void* pemain1(void *arg)
 {
+	pthread_mutex_lock(&lock);
     struct player *maen =  (struct player*)arg;
     char t;
-    while(status != 0 )
-    {
-
-    }
-    status = 0;	
-    int flag = 4;
-    printf("\nPlayer 1 silahkan memilih angka untuk meletakkan ranjau sebanyak 1-4 \n");
+	int flag;
+    printf("Player 1 silahkan memilih angka untuk meletakkan ranjau sebanyak 1-4 pada 16 lubang tersedia \n");
+	printf("Berapa ranjau yg akan dimasukkan?\n");
+	scanf("%d",&flag);
+		printf("masukkan\n");
     while(flag != 0){
 	scanf("%d",&maen->lub,&t);
-	maen->mine[maen->lub] = 1;
-	flag--; 
+	if (maen->mine[maen->lub] == 0) {maen->mine[maen->lub] = 1; maen->htung++;}
+	else { printf("ranjau sudah ada , pilih lubang lainnya\n"); flag++; }
+	flag--;
     }
     printf("ranjau sudah dipasang\n");
-    status = 1;
-    printf("Player 1 silahkan memilih 4 lubang\n");
-    int i, j ;
-    int x;
-	for (i = 0 ; i < 4 ; i++)
-	{
-		scanf("%d", &x);
-		if(maen->mine[x] == 1) {printf("anda benar\n");maen->poin += 1;}
-		else {printf("anda salah\n");} 	
-	}
-	printf("poin player 1 : %d\n",maen->poin);
-	status = 1;
-    return NULL;
-}
-
-
-void* pemain2(void *arg)
-{
-    struct player *maen2 =  (struct player*)arg;
-    while(status != 1 )
-    {
-
-    }
-    status = 0;
-    char t;
-    int flag = 4;
-    printf("\nPlayer 2 silahkan memilih angka untuk meletakkan ranjau sebanyak 1-4 \n");
-    while(flag != 0){
-	scanf("%d",&maen2->lub,&t);
-	maen2->mine[maen2->lub] = 1;
-	flag--; 
-    }
-    printf("ranjau sudah dipasang\n");
+ 
     printf("Player 2 silahkan memilih 4 lubang\n");
     int i, j ;
     int x;
 	for (i = 0 ; i < 4 ; i++)
 	{
 		scanf("%d", &x);
-		if(maen2->mine[x] == 1) {printf("anda benar\n");maen2->poin += 1;}
-		else {printf("anda salah\n");} 	
+		if(maen->mine[x] == 1) {printf("anda benar\n");maen->poin2 += 1;maen->mine[x] = 12;}
+		else if(maen->mine[x] == 0) {printf("anda salah\n");maen->poin += 1;}
+		else{printf("anda sudah memilih sebelumnya , pilih lubang lain\n");i--;} 	
 	}
-	printf("poin player 2 : %d\n",maen2->poin);
-    status = 1;
+	
+	status = 1;
+			printf("poin pemain 1 =%d \n",maen->poin );
+		printf("poin pemain 2 =%d \n",maen->poin2 );
+	if (maen->poin >=10 || maen->poin2 >=10){
+		exit(EXIT_FAILURE);}
+	pthread_mutex_unlock(&lock);	
+    return NULL;
+}
+
+
+void* pemain2(void *arg)
+{
+	pthread_mutex_lock(&lock);
+    struct player *maen =  (struct player*)arg;
+        char t;
+	int flag;
+    printf("Player 2 silahkan memilih angka untuk meletakkan ranjau sebanyak 1-4 dalam 16 lubang tersedia \n");
+	printf("Berapa ranjau yg akan dimasukkan?\n");
+	scanf("%d",&flag);
+	printf("masukkan\n");
+    while(flag != 0){
+	scanf("%d",&maen->lub2,&t);
+	if (maen->mine2[maen->lub2] == 0) {maen->mine2[maen->lub2] = 1;maen->htung2++;}
+	else {printf("ranjau sudah ada , pilih lubang lainnya\n"); flag++;} 
+	flag--;
+    }
+
+    printf("ranjau sudah dipasang\n");
+    printf("Player 1 silahkan memilih 4 lubang\n");
+    int i, j ;
+    int x;
+	for (i = 0 ; i < 4 ; i++)
+	{
+		scanf("%d", &x);
+		if(maen->mine2[x] == 1) {printf("anda benar\n");maen->poin += 1;maen->mine2[x] = 12;}
+		else if (maen->mine2[x] == 0){printf("anda salah\n");maen->poin2 += 1;} 	
+		else {printf("anda sudah memilih sebelumnya , pilih lubang lain\n");i--;}	
+	}	
+				printf("poin pemain 1 =%d \n",maen->poin );
+		printf("poin pemain 2 =%d \n",maen->poin2 );
+	if (maen->poin >=10 || maen->poin2 >=10 || maen->htung2 == 16 || maen->htung == 16){
+		exit(EXIT_FAILURE);}
+    
+		pthread_mutex_unlock(&lock);    
 return 0;	
     
 }
  
 int main(void)
 {
-    pmn plyr1,plyr2;
-    plyr1.poin = 0;
-    plyr2.poin = 0;
-    memset(plyr1.mine , 0 , 16);
-    memset(plyr2.mine, 0 , 16);
-    status = 1;
-    
-    pthread_create(&(tid1), NULL, &pemain1, &plyr1);
-    pthread_create(&(tid2), NULL, &pemain2, &plyr2);
+    pmn plyr;
+	int i,lol = 2;
+    plyr.poin = 0;
+    plyr.poin2 = 0;
+    plyr.htung = 0;
+    plyr.htung2 = 0;
+	for (i = 1 ; i < 17 ; i++){
+		plyr.mine[i] = 0;
+	}
+	for (i = 1 ; i < 17 ; i++){
+		plyr.mine2[i] = 0;
+	}
 
-    printf("poin pemain 1 =%d \n",plyr1.poin );
-    printf("poin pemain 2 =%d \n",plyr2.poin );
+	for(i = 0; i < 15 ; i++){
+    		pthread_create(&(tid1), NULL, &pemain1, &plyr);
+    		pthread_create(&(tid2), NULL, &pemain2, &plyr);	
+	}
+		
+
 
     pthread_join(tid1, NULL);
     pthread_join(tid2, NULL);
